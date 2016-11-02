@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import jade.gui.GuiEvent;
+
 public final class ClientAgentGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -49,8 +51,13 @@ public final class ClientAgentGUI extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if (e.getSource() == encontrarProducto) {
+			GuiEvent ge = new GuiEvent(this, ClientAgent.MOVE_AGENT);
+			ge.addParameter((String) manufacturerField.getText());
+			ge.addParameter((String) modeloField.getText());
+			ge.addParameter((Integer) Integer.parseInt(entregaField.getText()));
+			clientAgent.postGuiEvent(ge);
+		}
 	}
 	
 	// Añade los widgets al JFrame

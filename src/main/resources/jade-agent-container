@@ -1,5 +1,5 @@
 agents=\
-    client-agent:com.sanchez.sergio.client.ClientAgent;\
+    client-agent:client.ClientAgent;\
 port=10099
 host=localhost
 main=false
