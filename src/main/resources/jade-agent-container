@@ -1,0 +1,6 @@
+agents=\
+    client-agent:com.sanchez.sergio.client.ClientAgent;\
+port=10099
+host=localhost
+main=false
+no-display=true
