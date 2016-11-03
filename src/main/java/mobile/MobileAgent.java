@@ -1,5 +1,6 @@
 package mobile;
 
+import client.ClientAgent;
 import jade.content.Concept;
 import jade.content.ContentElement;
 import jade.content.lang.sl.SLCodec;
@@ -13,6 +14,7 @@ import jade.domain.JADEAgentManagement.KillAgent;
 import jade.domain.mobility.MobilityOntology;
 import jade.domain.mobility.MoveAction;
 import jade.lang.acl.ACLMessage;
+import main.ASAgent;
 import utils.TestValues;
 
 /**
@@ -62,15 +64,15 @@ public final class MobileAgent extends Agent{
 	@Override
 	protected void afterMove() {
 		super.afterMove();
-		System.out.println("He llegado al contenedor : " + this.here().getName());
-		addBehaviour(new SendMessage());
 		init();
+		addBehaviour(new SendMessage());
+		System.out.println("He llegado al contenedor : " + this.here().getName());
 	}
 
 	@Override
 	protected void beforeMove() {
 		super.beforeMove();
-		System.out.println("Moviéndome al destino : " + this.here().getName());
+		System.out.println("Estoy actualmente en : " + this.here().getName());
 	}
 	
 	
@@ -165,19 +167,22 @@ public final class MobileAgent extends Agent{
 			Location currentLocation = myAgent.here();
 			// Mensaje para el Application Server (AS)
 			if (currentLocation.getName().equals(TestValues.serverContainer)) {
+				System.out.println("Enviándo mensaje al ASAgent");
 				msg = new ACLMessage(ACLMessage.INFORM);
-				msg.addReceiver(new AID("AS", AID.ISLOCALNAME));
+				msg.addReceiver(new AID(ASAgent.AGENT_NAME, AID.ISLOCALNAME));
 				msg.setContent("");
 			}
 			// Mensaje para el cliente
 			else if (currentLocation.getName().equals(TestValues.clientContainer)) {
+				System.out.println("Enviándo mensaje al ClientAgent");
 				msg = new ACLMessage(ACLMessage.INFORM);
-				msg.addReceiver(new AID("Cliente", AID.ISLOCALNAME));
+				msg.addReceiver(new AID(ClientAgent.AGENT_NAME, AID.ISLOCALNAME));
 				msg.setContent(precio + "\t" + tiempoEntrega + "\t" + tienda);
 				kill = true;
 			}
 			// Mensaje para la tienda
 			else {
+				System.out.println("Enviándo mensaje al ShopAgent");
 				msg = new ACLMessage(ACLMessage.REQUEST);
 				msg.addReceiver(new AID("Tienda" + nTiendas, AID.ISLOCALNAME));
 				nTiendas++;

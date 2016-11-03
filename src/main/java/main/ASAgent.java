@@ -17,6 +17,7 @@ import utils.TestValues;
  */
 public final class ASAgent extends Agent {
 
+	public static final String AGENT_NAME = "AS_AGENT";
 	private static final long serialVersionUID = 1L;
 	private int nMobileSaltos = 0;
 	
@@ -42,17 +43,18 @@ public final class ASAgent extends Agent {
 		public void action() {
 			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
 			ACLMessage msg = myAgent.receive(mt);
-
 			if (msg!=null) {
-
-				// Recibe un mensaje del Mobile Agent
-				String request = msg.getContent();
 				nMobileSaltos++;
-				System.out.println(TestValues.clientContainer);
-				myAgent.addBehaviour(new MoveAgentBehaviour(MobileAgent.AGENT_NAME, "Container-"+nMobileSaltos));
-				/*moverAgente("mobile", "Container-"+nMobileSaltos);
-				if ((locations.size()-1) == nMobileSaltos)
-					nMobileSaltos = 0;*/
+				
+				if (nMobileSaltos <= TestValues.shops.length){
+					System.out.println("Moviendo agente a tienda nª " + nMobileSaltos);
+					myAgent.addBehaviour(new MoveAgentBehaviour(MobileAgent.AGENT_NAME, "Container-"+nMobileSaltos));
+				}else{
+					System.out.println("Moviendo agente al cliente");
+					nMobileSaltos = 0;
+					myAgent.addBehaviour(new MoveAgentBehaviour(MobileAgent.AGENT_NAME, "Container-4"));
+				}
+					
 			}
 			else {
 				block();

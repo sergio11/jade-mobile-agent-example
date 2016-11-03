@@ -10,7 +10,7 @@ import mobile.MobileAgent;
 
 public final class ClientAgent extends GuiAgent {
 	
-
+	public final static String AGENT_NAME = "CLIENT_AGENT";
 	private static final long serialVersionUID = 1L;
 	public static final int QUIT = 0;
 	public static final int MOVE_AGENT = 2;

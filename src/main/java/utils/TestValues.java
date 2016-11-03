@@ -6,10 +6,8 @@ public class TestValues {
 	
 	/*** Containers **/
 	public final static String serverContainer = "Main-Container";
-	public final static String tienda1Container = "Container-1";
-	public final static String tienda2Container = "Container-2";
-	public final static String tienda3Container = "Container-3";
-	public static String clientContainer ="";
+	public final static String[] shops = {"Tienda1", "Tienda2", "Tienda3"};
+	public static String clientContainer ="Container-4";
 
 	/** Características tiendas */
 	public final static int ntiendas = 3;

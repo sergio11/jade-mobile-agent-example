@@ -45,7 +45,6 @@ public final class ShopAgent extends Agent {
 				System.exit(0);
 			}
 		}
-		
 		addBehaviour(new ReceiveMessage());
 	}
 	
@@ -63,17 +62,17 @@ public final class ShopAgent extends Agent {
 		 */
 		private String encontrarProducto(String manufacturer, String modelo) {
 
-			String productFound;
+			String productFound = "";
 
 			for (int i = 0; i < TestValues.nProductos; i++) {
 				Producto p = tiendaDatabase[i];
 
 				if (p.getManufacturer().equals(manufacturer) && p.getModelo().equals(modelo)) {
 
-					return Integer.toString(p.getPrecio()) + "\t" + Integer.toString(p.getTiempoEntrega());
+					productFound = Integer.toString(p.getPrecio()) + "\t" + Integer.toString(p.getTiempoEntrega());
 				}
 			}
-			return "";
+			return productFound;
 		}
 
 		/*
@@ -104,6 +103,6 @@ public final class ShopAgent extends Agent {
 				block();
 			}
 
-		} // -- action
+		}
 	}
 }
