@@ -13,6 +13,7 @@ import utils.TestValues;
 public final class MobileAgent extends Agent{
 	
 	private static final long serialVersionUID = 1L;
+	public static final String AGENT_NAME = "mobile";
 	
 	private AID controller;
 	private String manufacturer;
